@@ -6,4 +6,4 @@ ADD . /app/
 RUN pip install Flask
 
 EXPOSE 8080
-CMD ["python", "/app/main.py"]
+CMD ["python", "/main.py"]
