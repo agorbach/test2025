@@ -1,0 +1,26 @@
+name: Deploy from Docker Hub
+
+on:
+  repository_dispatch:
+    types: [dockerhub_push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Pull Latest Docker Image
+        run: docker pull agorbach/far-2-cel:latest
+
+      - name: Stop and Remove Existing Container
+        run: |
+          docker ps -q --filter "name=flask-container" | grep -q . && docker stop flask-container && docker rm flask-container || true
+
+      - name: Run New Container
+        run: docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
