@@ -4,7 +4,8 @@ RUN mkdir /app
 WORKDIR /app
 COPY app/requirements.txt /app/requirements.txt
 ADD . /app/
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 EXPOSE 8080
 CMD ["python", "/app/main.py"]
