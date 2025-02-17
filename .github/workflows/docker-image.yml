@@ -20,7 +20,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build . --file far-2-cel/Dockerfile --tag agorbach/far-2-cel:latest
+        docker build . --file far-2-cel/app/Dockerfile --tag agorbach/far-2-cel:latest
 
     - name: Push the Docker image
       run: docker push agorbach/far-2-cel:latest
