@@ -8,16 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Connect to Server and Deploy
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}"
-            docker pull agorbach/far-2-cel:latest
-            docker stop flask-container || true
-            docker rm flask-container || true
-            docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
+        steps:
+      - name: Run Container in GitHub Runner
+        run: |
+          docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
