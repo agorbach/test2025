@@ -1,0 +1,14 @@
+name: Deploy from Docker Hub
+
+on:
+  repository_dispatch:
+    types: [dockerhub_push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Container in GitHub Runner
+        run: |
+          docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
