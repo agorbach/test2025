@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-        steps:
+    steps:
       - name: Run Container in GitHub Runner
         run: |
           docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
