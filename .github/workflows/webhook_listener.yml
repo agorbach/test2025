@@ -1,0 +1,12 @@
+name: Webhook Listener
+
+on:
+  repository_dispatch:
+    types: [dockerhub_push]
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Event
+        run: echo "Webhook received from Docker Hub!"
