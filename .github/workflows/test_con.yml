@@ -1,0 +1,16 @@
+name: Test Webhook Dispatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Dispatch Event
+        run: |
+          curl -X POST -H "Accept: application/vnd.github.v3+json" \
+               -H "Authorization: token ${{ secrets.WHOOK_PAT }}" \
+               https://api.github.com/repos/agorbach/test2025/dispatches \
+               -d '{"event_type": "dockerhub_push"}'
