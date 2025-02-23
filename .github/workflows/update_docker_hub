@@ -9,6 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Pull Latest Docker Image
+        run: docker pull agorbach/far-2-cel:latest
+
       - name: Run Container in GitHub Runner
         run: |
           docker run -d -p 80:5000 --name flask-container agorbach/far-2-cel:latest
+
+      - name: Check Running Containers
+        run: docker ps
