@@ -31,9 +31,14 @@ jobs:
           curl -s https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -o ngrok.zip
           unzip ngrok.zip
           sudo mv ngrok /usr/local/bin/
+          ngrok --version
 
       - name: Start ngrok tunnel
-        run: ngrok http 8080 &
+        run: |
+          nohup ngrok http 8080 > /dev/null 2>&1 &
+          sleep 5
 
       - name: Show ngrok URL
-        run: curl http://localhost:4040/api/tunnels
+        run: |
+          sleep 5
+          curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
