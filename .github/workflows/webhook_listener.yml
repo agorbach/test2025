@@ -27,9 +27,10 @@ jobs:
       - name: Check Running Containers
         run: docker ps
       - name: Install ngrok
-        run: curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc && \
-             echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && \
-             sudo apt update && sudo apt install ngrok
+        run: |
+          curl -s https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -o ngrok.zip
+          unzip ngrok.zip
+          sudo mv ngrok /usr/local/bin/
 
       - name: Start ngrok tunnel
         run: ngrok http 8080 &
