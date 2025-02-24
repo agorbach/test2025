@@ -1,14 +1,14 @@
 name: Deploy from Docker Hub
 
-on:
-  repository_dispatch:
+ on:
+    repository_dispatch:
     types: [dockerhub_push]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+ jobs:
+   deploy:
+     runs-on: ubuntu-latest
 
-    steps:
+     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
