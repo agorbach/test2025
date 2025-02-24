@@ -37,7 +37,13 @@ jobs:
         run: |
           nohup ngrok http 8080 > /dev/null 2>&1 &
           sleep 5
+          
+      - name: Check ngrok process
+        run: pgrep -af ngrok
 
+      - name: Debug ngrok output
+        run: curl -s http://localhost:4040/api/tunnels
+        
       - name: Show ngrok URL
         run: |
           sleep 5
