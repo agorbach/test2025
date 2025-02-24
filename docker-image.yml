@@ -1,0 +1,3 @@
+template-file-path: docker-image.yml
+parameters: {}
+tags: {}
