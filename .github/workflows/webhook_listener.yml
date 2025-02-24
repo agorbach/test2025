@@ -36,12 +36,8 @@ jobs:
       - name: Start ngrok tunnel
         run: |
           nohup ngrok http 8080 > /dev/null 2>&1 &
-          sleep 5      
-      
-
-      - name: Debug ngrok output
-        run: curl -s http://localhost:4040/api/tunnels
-        
+          sleep 5   
+  
       - name: Show ngrok URL
         run: |
           sleep 5
