@@ -1,7 +1,9 @@
 name: Test Webhook Dispatch
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  repository_dispatch:
+    types: [dockerhub_push]
 
 jobs:
   test-webhook:
