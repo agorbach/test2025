@@ -17,7 +17,7 @@ def index():
                 <input type="submit" value="Convert to Fahrenheit">
             </div>
             """
-        + """<br><br><div style="background-color: orange;color: blue; font-size: 2.6em; display: unset; padding: 6px;">Fahrenheit: <b>"""
+        + """<br><br><div style="background-color: orange;color: salmon; font-size: 2.6em; display: unset; padding: 6px;">Fahrenheit: <b>"""
         + fahrenheit + "</b></div></form>"
     )
 
