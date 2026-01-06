@@ -1,9 +1,9 @@
-FROM python:3.7
+FROM python:3.11-slim
 
-RUN mkdir /app
 WORKDIR /app
-ADD . /app/
+COPY . /app
+
 RUN pip install --no-cache-dir Flask
 
 EXPOSE 8080
-CMD ["python", "/app/main.py"]
+CMD ["python", "app.py"]
