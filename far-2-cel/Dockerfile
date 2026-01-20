@@ -6,4 +6,4 @@ COPY . /app
 RUN pip install --no-cache-dir Flask
 
 EXPOSE 8080
-CMD ["python", "app.py"]
+CMD ["python", "/app/main.py"]
