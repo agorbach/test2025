@@ -123,8 +123,7 @@ spec:
       labels:
         app.kubernetes.io/instance: far-demo
         app.kubernetes.io/name: far-demo-far-2-cel
-        app.kubernetes.io/managed-by: gcp-cloud-build-deploy
-        app.kubernetes.io/version: cca043e...
+        app.kubernetes.io/managed-by: gcp-cloud-build-deploy        
         helm.sh/chart: far-2-cel-0.1.0
     spec:
       containers:
