@@ -6,6 +6,7 @@ metadata:
     meta.helm.sh/release-namespace: default
   labels:
     app.kubernetes.io/instance: far-demo
+    app.kubernetes.io/name: far-2-cel
     helm.sh/chart: far-2-cel-0.1.0
   managedFields:
     - apiVersion: apps/v1
