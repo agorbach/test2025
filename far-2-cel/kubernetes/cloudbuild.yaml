@@ -1,112 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    meta.helm.sh/release-name: far-demo
-    meta.helm.sh/release-namespace: default
+  name: far-demo-far-2-cel
+  namespace: default
   labels:
     app.kubernetes.io/instance: far-demo
     app.kubernetes.io/name: far-demo-far-2-cel
     helm.sh/chart: far-2-cel-0.1.0
-  managedFields:
-    - apiVersion: apps/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/instance: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:app.kubernetes.io/name: {}
-            f:app.kubernetes.io/version: {}
-            f:helm.sh/chart: {}
-        f:spec:
-          f:progressDeadlineSeconds: {}
-          f:replicas: {}
-          f:revisionHistoryLimit: {}
-          f:selector: {}
-          f:strategy:
-            f:rollingUpdate:
-              .: {}
-              f:maxSurge: {}
-              f:maxUnavailable: {}
-            f:type: {}
-          f:template:
-            f:metadata:
-              f:labels:
-                .: {}
-                f:app.kubernetes.io/instance: {}
-                f:app.kubernetes.io/managed-by: {}
-                f:app.kubernetes.io/name: {}
-                f:app.kubernetes.io/version: {}
-                f:helm.sh/chart: {}
-            f:spec:
-              f:containers:
-                k:{"name":"far-2-cel"}:
-                  .: {}
-                  f:image: {}
-                  f:imagePullPolicy: {}
-                  f:name: {}
-                  f:ports:
-                    .: {}
-                    k:{"containerPort":8080,"protocol":"TCP"}:
-                      .: {}
-                      f:containerPort: {}
-                      f:name: {}
-                      f:protocol: {}
-                  f:resources: {}
-                  f:terminationMessagePath: {}
-                  f:terminationMessagePolicy: {}
-              f:dnsPolicy: {}
-              f:restartPolicy: {}
-              f:schedulerName: {}
-              f:securityContext: {}
-              f:serviceAccount: {}
-              f:serviceAccountName: {}
-              f:terminationGracePeriodSeconds: {}
-      manager: helm
-      operation: Update
-      time: '2026-01-27T17:07:43Z'
-    - apiVersion: apps/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            f:deployment.kubernetes.io/revision: {}
-        f:status:
-          f:availableReplicas: {}
-          f:conditions:
-            .: {}
-            k:{"type":"Available"}:
-              .: {}
-              f:lastTransitionTime: {}
-              f:lastUpdateTime: {}
-              f:message: {}
-              f:reason: {}
-              f:status: {}
-              f:type: {}
-            k:{"type":"Progressing"}:
-              .: {}
-              f:lastTransitionTime: {}
-              f:lastUpdateTime: {}
-              f:message: {}
-              f:reason: {}
-              f:status: {}
-              f:type: {}
-          f:observedGeneration: {}
-          f:readyReplicas: {}
-          f:replicas: {}
-          f:updatedReplicas: {}
-      manager: kube-controller-manager
-      operation: Update
-      subresource: status
-      time: '2026-01-27T17:07:45Z'
-  name: far-demo-far-2-cel
-  namespace: default
 spec:
   replicas: 3
   selector:
@@ -114,151 +14,47 @@ spec:
       app.kubernetes.io/instance: far-demo
       app.kubernetes.io/name: far-demo-far-2-cel
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app.kubernetes.io/instance: far-demo
         app.kubernetes.io/name: far-demo-far-2-cel
-        app.kubernetes.io/managed-by: gcp-cloud-build-deploy        
+        app.kubernetes.io/managed-by: gcp-cloud-build-deploy
         helm.sh/chart: far-2-cel-0.1.0
     spec:
-      containers:
-        - image: gcr.io/striped-temple-485610-b7/github.com/agorbach/test2025
-          imagePullPolicy: IfNotPresent
-          name: far-2-cel
-          ports:
-            - containerPort: 8080
-              name: http
-              protocol: TCP
-      serviceAccount: far-2-cel-sa
       serviceAccountName: far-2-cel-sa
+      containers:
+        - name: far-2-cel
+          image: gcr.io/striped-temple-485610-b7/github.com/agorbach/test2025
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-    meta.helm.sh/release-name: far-demo
-    meta.helm.sh/release-namespace: default
-  labels:
-    app.kubernetes.io/instance: far-demo
-    helm.sh/chart: far-2-cel-0.1.0
-  managedFields:
-    - apiVersion: v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/instance: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:app.kubernetes.io/name: {}
-            f:app.kubernetes.io/version: {}
-            f:helm.sh/chart: {}
-        f:spec:
-          f:internalTrafficPolicy: {}
-          f:ports:
-            .: {}
-            k:{"port":80,"protocol":"TCP"}:
-              .: {}
-              f:name: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-          f:selector: {}
-          f:sessionAffinity: {}
-          f:type: {}
-      manager: helm
-      operation: Update
-      time: '2026-01-27T12:24:22Z'
   name: far-demo-far-2-cel
   namespace: default
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+  labels:
+    app.kubernetes.io/instance: far-demo
+    app.kubernetes.io/name: far-demo-far-2-cel
+    helm.sh/chart: far-2-cel-0.1.0
 spec:
-  clusterIP: 34.118.235.35
-  clusterIPs:
-    - 34.118.235.35
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-    - IPv4
-  ipFamilyPolicy: SingleStack
+  type: ClusterIP
   ports:
     - name: http
       port: 80
-      protocol: TCP
       targetPort: 8080
+      protocol: TCP
   selector:
     app.kubernetes.io/instance: far-demo
-    app.kubernetes.io/name: far-2-cel
-  sessionAffinity: None
-  type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-    meta.helm.sh/release-name: far-demo
-    meta.helm.sh/release-namespace: default
-  labels:
-    app.kubernetes.io/instance: far-demo
-    helm.sh/chart: far-2-cel-0.1.0
-  managedFields:
-    - apiVersion: v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            .: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/instance: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:app.kubernetes.io/name: {}
-            f:app.kubernetes.io/version: {}
-            f:helm.sh/chart: {}
-        f:spec:
-          f:internalTrafficPolicy: {}
-          f:ports:
-            .: {}
-            k:{"port":80,"protocol":"TCP"}:
-              .: {}
-              f:name: {}
-              f:port: {}
-              f:protocol: {}
-              f:targetPort: {}
-          f:selector: {}
-          f:sessionAffinity: {}
-          f:type: {}
-      manager: helm
-      operation: Update
-      time: '2026-01-27T12:24:22Z'
-  name: far-demo-far-2-cel
-  namespace: default
-spec:
-  clusterIP: 34.118.235.35
-  clusterIPs:
-    - 34.118.235.35
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-    - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 8080
-  selector:
-    app.kubernetes.io/instance: far-demo
-    app.kubernetes.io/name: far-2-cel
-  sessionAffinity: None
-  type: ClusterIP
+    app.kubernetes.io/name: far-demo-far-2-cel
